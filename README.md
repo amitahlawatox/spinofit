@@ -5,14 +5,14 @@ Static, responsive profile website for SPINOFIT, a physiotherapy brand intended 
 ## Structure
 - `index.html` — home/profile, service overview, FAQs and enquiry form
 - `articles/index.html` — articles hub
-- `articles/*.html` — three educational articles
+- `articles/*.html` — educational articles, including neurological physiotherapy
 - `assets/css/styles.css` — responsive design system
 - `assets/js/main.js` — mobile navigation and footer year
 - `privacy.html` — draft privacy notice requiring business-owner review
 - `robots.txt` and `sitemap.xml` — search engine discovery
 
 ## Preview / deployment
-This is a static site and can be hosted with GitHub Pages, Netlify or another static host. The current enquiry form opens the visitor’s default email app with a prepared message. It does not store or transmit form submissions directly from the website. Confirm the recipient email is active and test this flow on desktop and mobile. If you later want server-side form submissions, connect and test a form provider before collecting data.
+This is a static site and can be hosted with GitHub Pages, Netlify or another static host. The enquiry form uses FormSubmit to deliver form submissions to contact@spinofit.com.au. The recipient must first activate the address using the confirmation email from FormSubmit. Test email delivery, spam filtering, privacy disclosures and form handling end-to-end before launch.
 
 ## Launch checklist — required
 1. Replace the portrait placeholder with the supplied, approved physiotherapist photo. Do not publish the illustrated placeholder as the real person.
