@@ -12,7 +12,7 @@ Static, responsive profile website for SPINOFIT, a physiotherapy brand intended 
 - `robots.txt` and `sitemap.xml` — search engine discovery
 
 ## Preview / deployment
-This is a static site and can be hosted with GitHub Pages, Netlify or another static host. If deploying to Netlify, confirm that the site is connected and that Netlify Forms is enabled for the `spinofit-enquiry` form. The current form will not collect submissions on plain GitHub Pages without a separate form backend. Test an enquiry end-to-end before launch.
+This is a static site and can be hosted with GitHub Pages, Netlify or another static host. The current enquiry form opens the visitor’s default email app with a prepared message. It does not store or transmit form submissions directly from the website. Confirm the recipient email is active and test this flow on desktop and mobile. If you later want server-side form submissions, connect and test a form provider before collecting data.
 
 ## Launch checklist — required
 1. Replace the portrait placeholder with the supplied, approved physiotherapist photo. Do not publish the illustrated placeholder as the real person.
