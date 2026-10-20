@@ -1,66 +1,10 @@
 (() => {
-  const toggle = document.querySelector('.menu-toggle');
-  const nav = document.querySelector('#primary-nav');
-  if (toggle && nav) {
-    toggle.addEventListener('click', () => {
-      const open = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!open));
-      nav.classList.toggle('is-open', !open);
-      toggle.setAttribute('aria-label', open ? 'Open navigation' : 'Close navigation');
-    });
-    nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-      nav.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
-      toggle.setAttribute('aria-label', 'Open navigation');
-    }));
-  }
-
-  // Crisp micro-interactions: reading progress, compact sticky header and gentle reveal.
-  const progress = document.createElement('div');
-  progress.id = 'reading-progress';
-  progress.setAttribute('aria-hidden', 'true');
-  document.body.appendChild(progress);
-
-  const header = document.querySelector('.site-header');
-  let scrollQueued = false;
-  const updateScrollUI = () => {
-    const doc = document.documentElement;
-    const max = doc.scrollHeight - window.innerHeight;
-    const percent = max > 0 ? (window.scrollY / max) * 100 : 0;
-    progress.style.width = Math.min(100, Math.max(0, percent)) + '%';
-    if (header) header.classList.toggle('is-scrolled', window.scrollY > 14);
-    scrollQueued = false;
-  };
-  window.addEventListener('scroll', () => {
-    if (!scrollQueued) {
-      window.requestAnimationFrame(updateScrollUI);
-      scrollQueued = true;
-    }
-  }, {passive: true});
-  updateScrollUI();
-
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!reduceMotion && 'IntersectionObserver' in window) {
-    document.body.classList.add('reveal-ready');
-    const revealTargets = document.querySelectorAll(
-      '.section-index, .section-overline, .two-col > *, .fact, .service-card, .timeline-entry, .journal-card, .contact-copy, .contact-form, .statement-inner'
-    );
-    revealTargets.forEach((el, i) => {
-      el.setAttribute('data-reveal', '');
-      if (el.classList.contains('service-card') || el.classList.contains('journal-card') || el.classList.contains('fact')) {
-        el.setAttribute('data-reveal-delay', String((i % 3) + 1));
-      }
-    });
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          obs.unobserve(entry.target);
-        }
-      });
-    }, {threshold: 0.12, rootMargin: '0px 0px -35px 0px'});
-    revealTargets.forEach(el => observer.observe(el));
-  }
-  const year = document.querySelector('#year');
-  if (year) year.textContent = new Date().getFullYear();
+ const toggle=document.querySelector('.menu-toggle'),nav=document.querySelector('#primary-nav');
+ if(toggle&&nav){const close=()=>{nav.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Open navigation')};toggle.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',String(!open));toggle.setAttribute('aria-label',open?'Open navigation':'Close navigation');nav.classList.toggle('is-open',!open)});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));document.addEventListener('click',e=>{if(nav.classList.contains('is-open')&&!nav.contains(e.target)&&!toggle.contains(e.target))close()});document.addEventListener('keydown',e=>{if(e.key==='Escape')close()})}
+ const progress=document.createElement('div');progress.id='reading-progress';progress.setAttribute('aria-hidden','true');document.body.appendChild(progress);const header=document.querySelector('.site-header');let queued=false;
+ const update=()=>{const d=document.documentElement,m=d.scrollHeight-window.innerHeight;progress.style.width=(m>0?Math.min(100,Math.max(0,window.scrollY/m*100)):0)+'%';if(header)header.classList.toggle('is-scrolled',window.scrollY>14);const dock=document.querySelector('#mobile-enquiry-dock');if(dock)dock.classList.toggle('is-visible',window.scrollY>220);queued=false};
+ window.addEventListener('scroll',()=>{if(!queued){requestAnimationFrame(update);queued=true}},{passive:true});update();
+ if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver'in window){document.body.classList.add('reveal-ready');const targets=document.querySelectorAll('.section-index,.section-overline,.two-col>*,.fact,.service-card,.timeline-entry,.journal-card,.contact-copy,.contact-form,.statement-inner');targets.forEach((e,i)=>{e.setAttribute('data-reveal','');if(e.classList.contains('service-card')||e.classList.contains('journal-card')||e.classList.contains('fact'))e.setAttribute('data-reveal-delay',String(i%3+1))});const ob=new IntersectionObserver((es,o)=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('is-visible');o.unobserve(x.target)}}),{threshold:.12,rootMargin:'0px 0px -35px 0px'});targets.forEach(e=>ob.observe(e))}
+ if(!document.querySelector('#mobile-enquiry-dock')){const dock=document.createElement('div');dock.id='mobile-enquiry-dock';dock.setAttribute('aria-label','Quick contact');dock.innerHTML='<img class="dock-symbol" src="/assets/images/spinofit-symbol.svg" alt=""><span class="dock-copy"><strong>Need physiotherapy support?</strong><small>SPINOFIT · North Brisbane & Logan</small></span><a href="/#contact">Enquire <span>↗</span></a>';document.body.appendChild(dock)}
+ const year=document.querySelector('#year');if(year)year.textContent=new Date().getFullYear()
 })();
