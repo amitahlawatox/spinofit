@@ -1,6 +1,6 @@
 # SPINOFIT website
 
-Static, responsive profile website for SPINOFIT, a physiotherapy brand intended to serve Brisbane, Queensland. The design takes inspiration from the clean white personal-portfolio layout of Reeni, adapted for a healthcare profile and general health education.
+Static, responsive profile website for SPINOFIT, a physiotherapy brand intended to serve North Brisbane, South Brisbane, Logan and Redland Bay, Queensland. The design takes inspiration from the clean white personal-portfolio layout of Reeni, adapted for a healthcare profile and general health education.
 
 ## Structure
 - `index.html` — home/profile, service overview, FAQs and enquiry form
